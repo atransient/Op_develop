@@ -1,0 +1,3 @@
+nvcc gemm_impl.cpp fe_utils/graph_build.cpp -g -o gemm_impl -lcudnn -I/home/name/Project/myself/Op_develop/utils -I/home/name/Project/cudnn-frontend/include -I/home/name/Project/myself/Op_develop/op_cudnn/frontend/fe_utils
+
+# nvcc demo.cpp -o demo -lcudnn -I/home/name/Project/myself/Op_develop/utils -I/home/name/Project/cudnn-frontend/include -I/home/name/Project/myself/Op_develop/op_cudnn/frontend/fe_utils
