@@ -16,3 +16,6 @@ target_link_libraries(
     Tensor
     ${CUDA_LIBRARIES}
 )
+
+
+target_compile_options(be_utils PRIVATE -g)

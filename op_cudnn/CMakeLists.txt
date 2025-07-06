@@ -18,22 +18,9 @@ add_subdirectory(backend)
 
 pybind11_add_module(cudnn_op module_binding.cpp)
 
-# target_include_directories(
-#     cudnn_op PUBLIC
-#     ${CMAKE_CURRENT_SOURCE_DIR}/frontend
-# )
-
-# target_link_directories(
-#     cudnn_op PUBLIC
-#     ${CMAKE_CURRENT_SOURCE_DIR}/frontend
-# )
 
 target_link_libraries(
     cudnn_op PUBLIC
     gemm_impl
     CONV_BE
 )
-
-# set_target_properties(cudnn_op PROPERTIES
-#     OUTPUT_NAME "cudnn_op"
-# )

@@ -27,6 +27,10 @@ add_library(
         be_bpa.cpp
     )
 
+target_compile_options(
+  CONV_BE PRIVATE -g
+)
+
 target_link_libraries(
   CONV_BE PUBLIC
   be_utils

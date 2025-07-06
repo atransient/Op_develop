@@ -21,6 +21,7 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/NVIDIA/cudnn-frontend.git
 #   GIT_BRANCH main
   GIT_TAG v1.10.0
+  GIT_PROGRESS TRUE
   # GIT_SUBMODULES ALL # 如果这个库自身也有 submodule，加上这个
 )
 
