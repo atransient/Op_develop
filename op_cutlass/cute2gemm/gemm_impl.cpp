@@ -20,25 +20,25 @@ void cutlass_matmul_tensor(MyTensor A_tensor, MyTensor B_tensor, MyTensor C_tens
             {
                 float alpha = float(1.0f);
                 float beta = float(0.0f);
-                gemm_nt(b, m, n, k,
+                gemm_tt(b, m, n, k,
                     alpha,
                     reinterpret_cast<cute::bfloat16_t*>(A_tensor.data_ptr()),
                     reinterpret_cast<cute::bfloat16_t*>(B_tensor.data_ptr()),
                     beta,
-                    reinterpret_cast<cute::bfloat16_t*>(C_tensor.data_ptr()),
-                )
+                    reinterpret_cast<cute::bfloat16_t*>(C_tensor.data_ptr())
+                );
             }
             else
             {  
                 float alpha = float(1.0f);
                 float beta = float(0.0f);
-                gemm_nt(b, m, n, k,
+                gemm_tt(b, m, n, k,
                     alpha,
                     reinterpret_cast<cute::bfloat16_t*>(A_tensor.data_ptr()),
                     reinterpret_cast<cute::bfloat16_t*>(B_tensor.data_ptr()),
                     beta,
-                    reinterpret_cast<float*>(C_tensor.data_ptr()),
-                )
+                    reinterpret_cast<float*>(C_tensor.data_ptr())
+                );
             }
             break;
         }
@@ -49,25 +49,25 @@ void cutlass_matmul_tensor(MyTensor A_tensor, MyTensor B_tensor, MyTensor C_tens
             {
                 cute::half_t alpha = cute::half_t(1.0f);
                 cute::half_t beta = cute::half_t(0.0f);
-                gemm_nt(b, m, n, k,
+                gemm_tt(b, m, n, k,
                     alpha,
                     reinterpret_cast<cute::half_t*>(A_tensor.data_ptr()),
                     reinterpret_cast<cute::half_t*>(B_tensor.data_ptr()),
                     beta,
-                    reinterpret_cast<cute::half_t*>(C_tensor.data_ptr()),
-                )
+                    reinterpret_cast<cute::half_t*>(C_tensor.data_ptr())
+                );
             }
             else
             {  
                 float alpha = float(1.0f);
                 float beta = float(0.0f);
-                gemm_nt(b, m, n, k,
+                gemm_tt(b, m, n, k,
                     alpha,
                     reinterpret_cast<cute::half_t*>(A_tensor.data_ptr()),
                     reinterpret_cast<cute::half_t*>(B_tensor.data_ptr()),
                     beta,
-                    reinterpret_cast<float*>(C_tensor.data_ptr()),
-                )
+                    reinterpret_cast<float*>(C_tensor.data_ptr())
+                );
             }
             break;
         }

@@ -25,3 +25,5 @@ target_include_directories(
     batch_gemm INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+target_compile_options(batch_gemm PRIVATE --generate-code=arch=compute_90a,code=[sm_90a] --expt-relaxed-constexpr -g)

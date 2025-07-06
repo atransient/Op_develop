@@ -14,6 +14,7 @@ cmake_path(GET CURRENT_DIR PARENT_PATH PARENT_DIR)
 # add_subdirectory(${PYBIND11_SOURCE_DIR} ${PYBIND11_BINARY_DIR})
 
 add_subdirectory(frontend)
+add_subdirectory(backend)
 
 pybind11_add_module(cudnn_op module_binding.cpp)
 
@@ -30,6 +31,7 @@ pybind11_add_module(cudnn_op module_binding.cpp)
 target_link_libraries(
     cudnn_op PUBLIC
     gemm_impl
+    CONV_BE
 )
 
 # set_target_properties(cudnn_op PROPERTIES

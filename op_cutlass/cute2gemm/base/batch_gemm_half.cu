@@ -164,7 +164,7 @@ gemm_device(ProblemShape shape_MNK, CtaTiler cta_tiler,
   auto K_PIPE_MAX = size<1>(tAsA);
 
   // Total count of tiles
-  int k_tile_count = size<1>(tAgA);
+  int k_tile_count = size<2>(tAgA);
   // Current tile index in gmem to read from
   int k_tile = 0;
 
@@ -260,6 +260,10 @@ gemm_device(ProblemShape shape_MNK, CtaTiler cta_tiler,
     }
     --k_tile_count;
     ++k_tile;
+  }
+  if (thread0())
+  {
+    print("tCrC:    ");print(tCrC(0));print("\n");
   }
 
   axpby<TC>(alpha, tCrC, beta, tCgC);
@@ -380,7 +384,7 @@ gemm(char transA, char transB, int b, int m, int n, int k,
 
 int main(int argc, char** argv)
 {
-  int b = 64;
+  int b = 1;
   int m = 512;
   if (argc >= 2)
     sscanf(argv[1], "%d", &m);
@@ -389,7 +393,7 @@ int main(int argc, char** argv)
   if (argc >= 3)
     sscanf(argv[2], "%d", &n);
 
-  int k = 512;
+  int k = 1024;
   if (argc >= 4)
     sscanf(argv[3], "%d", &k);
 
@@ -406,36 +410,11 @@ int main(int argc, char** argv)
   using TC = cute::half_t;
   using TI = cute::half_t;
 
-  // using TA = half;
-  // using TB = half;
-  // using TC = half;
-  // using TI = cute::half_t;
 
   TI alpha = TI(1.0f);
   TI beta  = TI(0.0f);
 
 
-  float tval = 2.0;
-  cute::bfloat16_t test1(tval);
-  cute::bfloat16_t test;
-
-  
-  test = test1;
-
-  print(test);print("\n");
-
-  // thrust::host_vector<TA> h_A(m*k);
-  // thrust::host_vector<TB> h_B(n*k);
-  // thrust::host_vector<TC> h_C(m*n);
-
-  // // Initialize the tensors
-  // for (int j = 0; j < m*k; ++j) h_A[j] = TA(int((rand() % 2) ? 1 : -1));
-  // for (int j = 0; j < n*k; ++j) h_B[j] = TB(int((rand() % 2) ? 1 : -1));
-  // for (int j = 0; j < m*n; ++j) h_C[j] = TC(0);
-
-  // thrust::device_vector<TA> d_A = h_A;
-  // thrust::device_vector<TB> d_B = h_B;
-  // thrust::device_vector<TC> d_C = h_C;
   Surface<half> A_gpu(b*m*k, false);
   Surface<half> B_gpu(b*n*k, false);
   Surface<half> C_gpu(b*m*n, false);
@@ -466,6 +445,21 @@ int main(int argc, char** argv)
        reinterpret_cast<TC*>(C_gpu.devPtr), ldC);
   CUTE_CHECK_LAST();
   // thrust::host_vector<TC> cute_result = d_C;
+
+  {
+    TI *h_A = reinterpret_cast<TI*>(A_gpu.hostPtr);
+    TI *h_B = reinterpret_cast<TI*>(B_gpu.hostPtr);
+    TI tmp = TI(0.0f);
+    for  (int i = 0; i < k; ++i)
+    {
+      tmp += h_A[i * m] * h_B[i*n];
+    }
+    print(tmp);print("\n");
+    
+    // TI *ptr = reinterpret_cast<TC*>(C_gpu.devPtr);
+    // print(ptr[0]);print("\n");
+  }
+
 
  return 0;
 

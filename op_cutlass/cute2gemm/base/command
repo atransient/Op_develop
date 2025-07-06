@@ -1,3 +1,5 @@
-# nvcc batch_gemm_half.cu -g -I/home/name/Source_code_library/cutlass/include -I/home/name/Source_code_library/cutlass/tools/util/include -I/home/name/Project/myself/Op_develop/utils --generate-code=arch=compute_90a,code=[sm_90a] --expt-relaxed-constexpr -o batch_gemm_half
+# nvcc batch_gemm_half.cu -g -I/home/wenyi.huang/Source_code_library/cutlass/include -I/home/wenyi.huang/Source_code_library/cutlass/tools/util/include -I/home/wenyi.huang/Project/myself/Op_develop/utils --generate-code=arch=compute_90a,code=[sm_90a] --expt-relaxed-constexpr -o batch_gemm_half
 
-nvcc test.cpp batch_gemm.cu -g -I/home/name/Source_code_library/cutlass/include -I/home/name/Project/myself/Op_develop/utils --generate-code=arch=compute_90a,code=[sm_90a] --expt-relaxed-constexpr -o test
+# nvcc test.cpp batch_gemm.cu -g -I/home/wenyi.huang/Source_code_library/cutlass/include -I/home/wenyi.huang/Project/myself/Op_develop/utils --generate-code=arch=compute_90a,code=[sm_90a] --expt-relaxed-constexpr -o test
+
+nvcc gemm_half.cu -g -I/home/wenyi.huang/Source_code_library/cutlass/include -I/home/wenyi.huang/Source_code_library/cutlass/tools/util/include -I/home/wenyi.huang/Project/myself/Op_develop/utils --generate-code=arch=compute_90a,code=[sm_90a] --expt-relaxed-constexpr -o gemm_half

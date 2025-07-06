@@ -121,7 +121,7 @@ gemm_device(ProblemShape shape_MNK, CtaTiler cta_tiler,
   auto K_PIPE_MAX = size<1>(tAsA);
 
   // Total count of tiles
-  int k_tile_count = size<1>(tAgA);
+  int k_tile_count = size<2>(tAgA);
   // Current tile index in gmem to read from
   int k_tile = 0;
 

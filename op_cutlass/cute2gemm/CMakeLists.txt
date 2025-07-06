@@ -40,7 +40,7 @@ target_link_directories(
 
 target_link_libraries(
     cutlass_gemm_impl PUBLIC
-    base
+    batch_gemm
     ${CUDA_LIBRARIES}
     Tensor
 )
@@ -49,3 +49,5 @@ target_include_directories(
     cutlass_gemm_impl INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+target_compile_options(cutlass_gemm_impl PRIVATE -g)
