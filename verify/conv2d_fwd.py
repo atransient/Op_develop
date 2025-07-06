@@ -7,7 +7,7 @@ import torch.nn as nn
 from py_utils.tensor_exchange import torch2self
 
 from MyTensor import MyTensor
-from cudnn_op import conv2d_forward1
+from cudnn_op import conv2d_forward
 
 N, C, H, W = 1,64, 16, 16
 K, C_, R, S = 256, 64, 1, 1
@@ -33,6 +33,6 @@ cudnnres = torch.zeros_like(torchres)
 mytensor_res = torch2self(cudnnres)
 mytensor_activation = torch2self(input)
 mytensor_weight = torch2self(weight)
-conv2d_forward1(mytensor_activation, mytensor_weight, mytensor_res, padding, stride, dilation, groups)
+conv2d_forward(mytensor_activation, mytensor_weight, mytensor_res, padding, stride, dilation, groups)
 
-# print(torch.allclose(torchres,cudnnres))
+print(torch.allclose(torchres,cudnnres,1e-2))

@@ -35,11 +35,12 @@ std::tuple<int, size_t, cudnnConvolutionFwdAlgo_t> be_fwd_desc(cudnnHandle_t &ha
 
     // Filter tensor descriptor (depthwise: one filter per input channel)
     CHECK_CUDNN_ERR(cudnnCreateFilterDescriptor(&filter_desc));
-    CHECK_CUDNN_ERR(cudnnSetFilter4dDescriptor(filter_desc, iodtype, CUDNN_TENSOR_NCHW, info.k, int(info.c / info.groups), info.r, info.s));
+    // CHECK_CUDNN_ERR(cudnnSetFilter4dDescriptor(filter_desc, iodtype, CUDNN_TENSOR_NCHW, info.k, int(info.c / info.groups), info.r, info.s));
+    CHECK_CUDNN_ERR(cudnnSetFilter4dDescriptor(filter_desc, iodtype, CUDNN_TENSOR_NCHW, info.k, info.c, info.r, info.s));
 
     // Convolution descriptor (with groups set to the number of input channels)
     CHECK_CUDNN_ERR(cudnnCreateConvolutionDescriptor(&conv_desc));
-    CHECK_CUDNN_ERR(cudnnSetConvolution2dDescriptor(conv_desc, info.padding, info.padding, info.stride, info.stride, info.dilation, info.dilation, CUDNN_CROSS_CORRELATION, cdtype));
+    CHECK_CUDNN_ERR(cudnnSetConvolution2dDescriptor(conv_desc, info.padding, info.padding, info.stride, info.stride, info.dilation, info.dilation, CUDNN_CROSS_CORRELATION, CUDNN_DATA_FLOAT));
 
     CHECK_CUDNN_ERR(cudnnSetConvolutionGroupCount(conv_desc, info.groups));
 
@@ -105,7 +106,7 @@ std::tuple<int, size_t, cudnnConvolutionBwdFilterAlgo_t> be_bpw_desc(cudnnHandle
 
     // Convolution descriptor (with groups set to the number of input channels)
     CHECK_CUDNN_ERR(cudnnCreateConvolutionDescriptor(&conv_desc));
-    CHECK_CUDNN_ERR(cudnnSetConvolution2dDescriptor(conv_desc, info.padding, info.padding, info.stride, info.stride, info.dilation, info.dilation, CUDNN_CROSS_CORRELATION, cdtype));
+    CHECK_CUDNN_ERR(cudnnSetConvolution2dDescriptor(conv_desc, info.padding, info.padding, info.stride, info.stride, info.dilation, info.dilation, CUDNN_CROSS_CORRELATION, CUDNN_DATA_FLOAT));
 
 
 
@@ -141,7 +142,7 @@ std::tuple<int, size_t, cudnnConvolutionBwdDataAlgo_t> be_bpa_desc(cudnnHandle_t
 
     // Convolution descriptor (with groups set to the number of input channels)
     CHECK_CUDNN_ERR(cudnnCreateConvolutionDescriptor(&conv_desc));
-    CHECK_CUDNN_ERR(cudnnSetConvolution2dDescriptor(conv_desc, info.padding, info.padding, info.stride, info.stride, info.dilation, info.dilation, CUDNN_CROSS_CORRELATION, cdtype));
+    CHECK_CUDNN_ERR(cudnnSetConvolution2dDescriptor(conv_desc, info.padding, info.padding, info.stride, info.stride, info.dilation, info.dilation, CUDNN_CROSS_CORRELATION, CUDNN_DATA_FLOAT));
 
 
 

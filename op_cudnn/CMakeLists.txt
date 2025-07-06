@@ -24,3 +24,6 @@ target_link_libraries(
     gemm_impl
     CONV_BE
 )
+
+
+target_compile_options(cudnn_op PRIVATE -g)

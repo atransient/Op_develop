@@ -14,6 +14,6 @@ PYBIND11_MODULE(cudnn_op, m)
         pybind11::arg("C_tensor"), pybind11::arg("caltype") = TensorDataType_t::FLOAT);
 
     m.def("conv2d_forward", &conv2d_forward, "conv2d_forward implement");
-    m.def("conv2d_bpa", &conv2d_forward, "conv2d_bpa implement");
-    m.def("conv2d_bpw", &conv2d_forward, "conv2d_bpw implement");
+    m.def("conv2d_bpa", &conv2d_bpa, "conv2d_bpa implement");
+    m.def("conv2d_bpw", &conv2d_bpw, "conv2d_bpw implement");
 }
