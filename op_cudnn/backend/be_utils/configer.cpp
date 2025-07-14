@@ -35,8 +35,8 @@ std::tuple<int, size_t, cudnnConvolutionFwdAlgo_t> be_fwd_desc(cudnnHandle_t &ha
 
     // Filter tensor descriptor (depthwise: one filter per input channel)
     CHECK_CUDNN_ERR(cudnnCreateFilterDescriptor(&filter_desc));
-    // CHECK_CUDNN_ERR(cudnnSetFilter4dDescriptor(filter_desc, iodtype, CUDNN_TENSOR_NCHW, info.k, int(info.c / info.groups), info.r, info.s));
-    CHECK_CUDNN_ERR(cudnnSetFilter4dDescriptor(filter_desc, iodtype, CUDNN_TENSOR_NCHW, info.k, info.c, info.r, info.s));
+    CHECK_CUDNN_ERR(cudnnSetFilter4dDescriptor(filter_desc, iodtype, CUDNN_TENSOR_NCHW, info.k, int(info.c / info.groups), info.r, info.s));
+    // CHECK_CUDNN_ERR(cudnnSetFilter4dDescriptor(filter_desc, iodtype, CUDNN_TENSOR_NCHW, info.k, info.c, info.r, info.s));
 
     // Convolution descriptor (with groups set to the number of input channels)
     CHECK_CUDNN_ERR(cudnnCreateConvolutionDescriptor(&conv_desc));

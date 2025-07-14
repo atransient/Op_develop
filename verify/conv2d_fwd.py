@@ -10,11 +10,11 @@ from MyTensor import MyTensor
 from cudnn_op import conv2d_forward
 
 N, C, H, W = 1,64, 16, 16
-K, C_, R, S = 256, 64, 1, 1
+K, C_, R, S = 64, 1, 3, 3
 padding = 0      # 填充
 stride = 1                   # 步幅
 dilation = 1                 # 膨胀系数
-groups = 1 
+groups = 64 
 dtype = torch.bfloat16
 device = "cuda"
 
