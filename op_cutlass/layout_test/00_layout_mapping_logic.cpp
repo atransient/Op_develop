@@ -21,5 +21,6 @@ int main()
     Layout<Shape<_2, _3>, Stride<_3, _1>>layout1;
     print_layout(layout1);
     print("printf 1D:    ");print1D(layout1);print("\n");
+
     return 0;
 }
