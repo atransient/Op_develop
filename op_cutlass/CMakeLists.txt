@@ -13,6 +13,7 @@ if(NOT cutlass_POPULATED)
   FetchContent_Populate(cutlass)
 endif()
 set(cutlass_path "${cutlass_SOURCE_DIR}/include")
+set(cutlass_utils_path "${cutlass_SOURCE_DIR}/tools/util/include")
 
 
 add_subdirectory(cute2gemm)
@@ -28,3 +29,4 @@ target_link_libraries(
 target_compile_options(cutlass_op PRIVATE -g)
 
 add_subdirectory(layout_test)
+add_subdirectory(search)
